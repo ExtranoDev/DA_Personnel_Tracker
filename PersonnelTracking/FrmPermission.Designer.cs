@@ -157,6 +157,7 @@
             this.btnSave.Size = new System.Drawing.Size(75, 70);
             this.btnSave.TabIndex = 3;
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // FrmPermission
             // 

@@ -36,15 +36,15 @@
             this.txtDayAmount = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.rbEndDate = new System.Windows.Forms.RadioButton();
+            this.rbStartDate = new System.Windows.Forms.RadioButton();
             this.dtEnd = new System.Windows.Forms.DateTimePicker();
             this.dtStart = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.cmdPosition = new System.Windows.Forms.ComboBox();
+            this.cmbPosition = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.cmbDepartment = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -62,6 +62,8 @@
             this.btnApproved = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.cmbState = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -82,6 +84,8 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.label10);
+            this.panel4.Controls.Add(this.cmbState);
             this.panel4.Controls.Add(this.btnClear);
             this.panel4.Controls.Add(this.btnSearch);
             this.panel4.Controls.Add(this.txtDayAmount);
@@ -108,6 +112,7 @@
             this.btnClear.TabIndex = 4;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnSearch
             // 
@@ -118,6 +123,7 @@
             this.btnSearch.Size = new System.Drawing.Size(64, 54);
             this.btnSearch.TabIndex = 3;
             this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtDayAmount
             // 
@@ -140,37 +146,37 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Controls.Add(this.rbEndDate);
+            this.groupBox1.Controls.Add(this.rbStartDate);
             this.groupBox1.Location = new System.Drawing.Point(305, 46);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(117, 63);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             // 
-            // radioButton2
+            // rbEndDate
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton2.Location = new System.Drawing.Point(6, 37);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(111, 21);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Delivery Date";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rbEndDate.AutoSize = true;
+            this.rbEndDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbEndDate.Location = new System.Drawing.Point(6, 37);
+            this.rbEndDate.Name = "rbEndDate";
+            this.rbEndDate.Size = new System.Drawing.Size(85, 21);
+            this.rbEndDate.TabIndex = 1;
+            this.rbEndDate.TabStop = true;
+            this.rbEndDate.Text = "End Date";
+            this.rbEndDate.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // rbStartDate
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton1.Location = new System.Drawing.Point(6, 10);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(90, 21);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Start Date";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rbStartDate.AutoSize = true;
+            this.rbStartDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbStartDate.Location = new System.Drawing.Point(6, 10);
+            this.rbStartDate.Name = "rbStartDate";
+            this.rbStartDate.Size = new System.Drawing.Size(90, 21);
+            this.rbStartDate.TabIndex = 0;
+            this.rbStartDate.TabStop = true;
+            this.rbStartDate.Text = "Start Date";
+            this.rbStartDate.UseVisualStyleBackColor = true;
             // 
             // dtEnd
             // 
@@ -220,7 +226,7 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.cmdPosition);
+            this.panel3.Controls.Add(this.cmbPosition);
             this.panel3.Controls.Add(this.label5);
             this.panel3.Controls.Add(this.cmbDepartment);
             this.panel3.Controls.Add(this.label4);
@@ -236,14 +242,14 @@
             this.panel3.Size = new System.Drawing.Size(281, 206);
             this.panel3.TabIndex = 0;
             // 
-            // cmdPosition
+            // cmbPosition
             // 
-            this.cmdPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdPosition.FormattingEnabled = true;
-            this.cmdPosition.Location = new System.Drawing.Point(111, 156);
-            this.cmdPosition.Name = "cmdPosition";
-            this.cmdPosition.Size = new System.Drawing.Size(148, 28);
-            this.cmdPosition.TabIndex = 4;
+            this.cmbPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbPosition.FormattingEnabled = true;
+            this.cmbPosition.Location = new System.Drawing.Point(111, 156);
+            this.cmbPosition.Name = "cmbPosition";
+            this.cmbPosition.Size = new System.Drawing.Size(148, 28);
+            this.cmbPosition.TabIndex = 4;
             // 
             // label5
             // 
@@ -408,12 +414,32 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 206);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(706, 161);
             this.dataGridView1.TabIndex = 2;
+            // 
+            // cmbState
+            // 
+            this.cmbState.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbState.FormattingEnabled = true;
+            this.cmbState.Location = new System.Drawing.Point(114, 164);
+            this.cmbState.Name = "cmbState";
+            this.cmbState.Size = new System.Drawing.Size(170, 28);
+            this.cmbState.TabIndex = 21;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(16, 170);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(46, 17);
+            this.label10.TabIndex = 21;
+            this.label10.Text = "State";
             // 
             // FrmPermissionList
             // 
@@ -426,6 +452,7 @@
             this.Name = "FrmPermissionList";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PermissionList";
+            this.Load += new System.EventHandler(this.FrmPermissionList_Load);
             this.panel1.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
@@ -452,7 +479,7 @@
         private System.Windows.Forms.Button btnApproved;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.ComboBox cmdPosition;
+        private System.Windows.Forms.ComboBox cmbPosition;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmbDepartment;
         private System.Windows.Forms.Label label4;
@@ -463,8 +490,8 @@
         private System.Windows.Forms.TextBox txtUserNo;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton rbEndDate;
+        private System.Windows.Forms.RadioButton rbStartDate;
         private System.Windows.Forms.DateTimePicker dtEnd;
         private System.Windows.Forms.DateTimePicker dtStart;
         private System.Windows.Forms.Label label8;
@@ -474,5 +501,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox cmbState;
     }
 }

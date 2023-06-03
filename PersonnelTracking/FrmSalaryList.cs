@@ -65,7 +65,6 @@ namespace PersonnelTracking
             cmbMonth.DisplayMember = "MonthName";
             cmbMonth.ValueMember = "ID";
             cmbMonth.SelectedIndex = -1;
-
         }
 
         private void FrmSalaryList_Load(object sender, EventArgs e)
