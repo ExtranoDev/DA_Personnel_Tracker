@@ -49,6 +49,8 @@ namespace PersonnelTracking
             cmbTaskStatus.ValueMember = "ID";
             cmbTaskStatus.SelectedIndex = -1;
         }
+        TaskDetailDTO detail = new TaskDetailDTO();
+
         private void FrmTaskList_Load(object sender, EventArgs e)
         {
             FillAllData();
@@ -141,6 +143,9 @@ namespace PersonnelTracking
             dataGridView1.DataSource = dto.Tasks;
         }
 
-
+        private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            detail.Firstname = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+        }
     }
 }
