@@ -384,6 +384,7 @@
             this.btnApprove.Size = new System.Drawing.Size(64, 54);
             this.btnApprove.TabIndex = 0;
             this.btnApprove.UseVisualStyleBackColor = false;
+            this.btnApprove.Click += new System.EventHandler(this.btnApprove_Click);
             // 
             // btnNew
             // 
