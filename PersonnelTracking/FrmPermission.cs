@@ -1,5 +1,6 @@
 ﻿using BLL;
 using DAL;
+using DAL.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,9 +26,19 @@ namespace PersonnelTracking
         }
 
         TimeSpan PermissionDay;
+        public bool isUpdate = false;
+        public PermissionDetailDTO detail = new PermissionDetailDTO();
         private void FrmPermission_Load(object sender, EventArgs e)
         {
             txtUserNo.Text = UserStatic.UserNo.ToString();
+            if (isUpdate)
+            {
+                dtStart.Value = detail.StartDate;
+                dtEnd.Value = detail.EndDate;
+                txtDayAmount.Text = detail.PermissionDayAmount.ToString();
+                txtExplanation.Text = detail.Explanation;
+                txtUserNo.Text = detail.UserNo.ToString();
+            }
         }
 
         private void dtStart_ValueChanged(object sender, EventArgs e)
@@ -53,20 +64,36 @@ namespace PersonnelTracking
             else
             {
                 Permission permission = new Permission();
-                permission.EmployeeID = UserStatic.EmployeeID;
-                permission.PermissionState = 1;
-                permission.PermissionStartDate = dtStart.Value.Date;
-                permission.PermissionEndDate = dtEnd.Value.Date;
-                permission.PermissionDay = Convert.ToInt32(txtDayAmount.Text);
-                permission.PermissionExplanation = txtExplanation.Text;
-                PermissionBLL.AddPermission(permission);
-                MessageBox.Show("Permission Granted!!!");
+                if (!isUpdate)
+                {
+                    permission.EmployeeID = UserStatic.EmployeeID;
+                    permission.PermissionState = 1;
+                    permission.PermissionStartDate = dtStart.Value.Date;
+                    permission.PermissionEndDate = dtEnd.Value.Date;
+                    permission.PermissionDay = Convert.ToInt32(txtDayAmount.Text);
+                    permission.PermissionExplanation = txtExplanation.Text;
+                    PermissionBLL.AddPermission(permission);
+                    MessageBox.Show("Permission Granted!!!");
+                    permission = new Permission();
+                    dtStart.Value = DateTime.Today;
+                    dtEnd.Value = DateTime.Today;
+                    txtDayAmount.Clear();
+                    txtExplanation.Clear();
+                } else if (isUpdate)
+                {
+                    DialogResult result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                    {
+                        permission.ID = detail.PermissionID;
+                        permission.PermissionExplanation = txtExplanation.Text;
+                        permission.PermissionStartDate = dtStart.Value;
+                        permission.PermissionEndDate = dtEnd.Value;
+                        permission.PermissionDay = Convert.ToInt32(txtDayAmount.Text);
+                        PermissionBLL.UpdatePermission(permission);
+                        MessageBox.Show("Permission successfully updated");
 
-                permission = new Permission();
-                dtStart.Value = DateTime.Today;
-                dtEnd.Value = DateTime.Today;
-                txtDayAmount.Clear();
-                txtExplanation.Clear();
+                    }
+                }
             }
         }
     }
