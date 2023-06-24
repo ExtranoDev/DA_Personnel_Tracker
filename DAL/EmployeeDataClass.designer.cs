@@ -20,9 +20,9 @@ namespace DAL
 	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
-	
-	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="PersonnelTracking")]
+    using DAL.DAO;
+
+    [global::System.Data.Linq.Mapping.DatabaseAttribute(Name="PersonnelTracking")]
 	public partial class EmployeeDataClassDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -246,7 +246,12 @@ namespace DAL
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-	}
+
+        public static void UpdateDepartment(Department department)
+        {
+			DepartmentDAO.UpdateDepartment(department);
+        }
+    }
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TaskState")]
 	public partial class TaskState : INotifyPropertyChanging, INotifyPropertyChanged
