@@ -40,5 +40,10 @@ namespace BLL
             }
             else return true;
         }
+
+        public static void UpdateEmployee(Employee employee)
+        {
+            EmployeeDAO.UpdateEmployee(employee);
+        }
     }
 }
