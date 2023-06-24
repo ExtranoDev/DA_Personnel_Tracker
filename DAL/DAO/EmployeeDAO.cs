@@ -127,5 +127,16 @@ namespace DAL.DAO
                 throw ex;
             }
         }
+
+        // Overloading employee update with a different object<position>
+        public static void UpdateEmployee(Position position)
+        {
+            List<Employee> list = db.Employees.Where(x => x.PositionID == position.ID).ToList();
+            foreach (var item in list)
+            {
+                item.DepartmentID = position.DepartmentID;
+            }
+            db.SubmitChanges();
+        }
     }
 }
