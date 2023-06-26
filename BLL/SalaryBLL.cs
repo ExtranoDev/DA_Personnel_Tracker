@@ -18,6 +18,11 @@ namespace BLL
                 EmployeeDAO.UpdateEmployee(salary.EmployeeID, salary.Amount);
         }
 
+        public static void DeleteTask(int salaryID)
+        {
+            SalaryDAO.DeleteSalary(salaryID);
+        }
+
         public static SalaryDTO GetAll()
         {
             SalaryDTO dto = new SalaryDTO();

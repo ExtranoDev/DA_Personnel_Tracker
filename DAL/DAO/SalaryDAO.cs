@@ -23,6 +23,21 @@ namespace DAL.DAO
             }
         }
 
+        public static void DeleteSalary(int salaryID)
+        {
+            try
+            {
+                Salary salary = db.Salaries.First(x => x.ID == salaryID);
+                db.Salaries.DeleteOnSubmit(salary);
+                db.SubmitChanges();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public static List<Month> GetMonths()
         {
             return db.Months.ToList();
