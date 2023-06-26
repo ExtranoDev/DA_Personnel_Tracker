@@ -15,6 +15,11 @@ namespace BLL
             TaskDAO.AddTask(task);
         }
 
+        public static void DeleteTask(int taskID)
+        {
+            TaskDAO.DeleteTask(taskID);
+        }
+
         public static TaskDTO GetAll()
         {
             TaskDTO taskDTO = new TaskDTO();

@@ -170,5 +170,17 @@ namespace PersonnelTracking
         {
 
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to delete Task?", "warning", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                TaskBLL.DeleteTask(detail.TaskID);
+                MessageBox.Show("Task Deleted Successfully");
+                FillAllData();
+                CleanFilters();
+            }
+        }
     }
 }
