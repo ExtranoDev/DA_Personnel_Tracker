@@ -58,6 +58,8 @@ namespace PersonnelTracking
         void FillAllData()
         {
             dto = SalaryBLL.GetAll();
+            if (!UserStatic.isAdmin)
+                dto.Salaries = dto.Salaries.Where(x => x.EmployeeID == UserStatic.EmployeeID).ToList();
             dataGridView1.DataSource = dto.Salaries;
             comboFull = false;
             cmbDepartment.DataSource = dto.Departments;
@@ -97,6 +99,12 @@ namespace PersonnelTracking
             dataGridView1.Columns[10].Visible = false;
             dataGridView1.Columns[12].Visible = false;
             dataGridView1.Columns[13].Visible = false;
+
+            btnUpdate.Visible = false;
+            btnDelete.Visible = false;
+            btnNew.Location = new Point(188, 12);
+            btnClose.Location = new Point(272, 12);
+            panel3.Hide();
         }
 
         private void cmbDepartment_SelectedIndexChanged(object sender, EventArgs e)

@@ -29,6 +29,8 @@ namespace PersonnelTracking
         void FillAllData()
         {
             dto = TaskBLL.GetAll();
+            if (!UserStatic.isAdmin)
+                dto.Tasks = dto.Tasks.Where(x => x.EmployeeID == UserStatic.EmployeeID).ToList();
             dataGridView1.DataSource = dto.Tasks;
 
             comboFull = false;
@@ -69,6 +71,18 @@ namespace PersonnelTracking
             dataGridView1.Columns[12].Visible = false;
             dataGridView1.Columns[13].Visible = false;
             dataGridView1.Columns[14].Visible = false;
+
+            if (!UserStatic.isAdmin)
+            {
+                btnNew.Visible = false;
+                btnUpdate.Visible = false;
+                btnDelete.Visible = false;
+
+                btnClose.Location = new Point(307, 14);
+                btnApprove.Location = new Point(223, 14);
+                pnlForAdmin.Hide();
+                btnApprove.Text = "Delivery";
+            }
         }
 
         private void btnNew_Click(object sender, EventArgs e)
@@ -168,6 +182,21 @@ namespace PersonnelTracking
 
         private void btnApprove_Click(object sender, EventArgs e)
         {
+            if (UserStatic.isAdmin && detail.TaskID == TaskStates.OnEmployee && detail.EmployeeID != UserStatic.EmployeeID)
+                MessageBox.Show("Employee have to deliver Task before approval");
+            else if (UserStatic.isAdmin && detail.TaskStateID == TaskStates.Approved)
+                MessageBox.Show("This Task has already been approved");
+            else if (!UserStatic.isAdmin && detail.TaskStateID == TaskStates.Delivered)
+                MessageBox.Show("This Task has already been Delivered");
+            else if (!UserStatic.isAdmin && detail.TaskStateID == TaskStates.Approved)
+                MessageBox.Show("This Task has already been approved");
+            else
+            {
+                TaskBLL.ApproveTask(detail.TaskID, UserStatic.isAdmin);
+                MessageBox.Show("Task Updated");
+                FillAllData();
+                CleanFilters();
+            }
 
         }
 
