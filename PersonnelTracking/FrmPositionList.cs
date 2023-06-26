@@ -74,5 +74,16 @@ namespace PersonnelTracking
             detail.DepartmentID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[4].Value);
             detail.OldDepartmentID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[4].Value);
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to delete Position?", "warning", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                PositionBLL.DeletePosition(detail.ID);
+                MessageBox.Show("Salary Deleted Successfully");
+                FillGrid();
+            }
+        }
     }
 }
