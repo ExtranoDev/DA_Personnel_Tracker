@@ -35,7 +35,7 @@ namespace PersonnelTracking
             this.Hide();
             frm.ShowDialog(); 
             this.Visible = true;
-            FillAllDate();
+            FillAllData();
             CleanFilters();
         }
 
@@ -51,7 +51,7 @@ namespace PersonnelTracking
                 this.Hide();
                 frm.ShowDialog();
                 this.Visible = true;
-                FillAllDate();
+                FillAllData();
                 CleanFilters();
             }
         }
@@ -60,7 +60,7 @@ namespace PersonnelTracking
         private bool comboFull = false;
         EmployeeDetailDTO detail = new EmployeeDetailDTO();
 
-        void FillAllDate()
+        void FillAllData()
         {
             dto = EmployeeBLL.GetAll();
             dataGridView1.DataSource = dto.Employees;
@@ -94,7 +94,7 @@ namespace PersonnelTracking
         }
         private void FrmEmployeeList_Load(object sender, EventArgs e)
         {
-            FillAllDate();
+            FillAllData();
         }
 
         private void cmbDepartment_SelectedIndexChanged(object sender, EventArgs e)
@@ -150,6 +150,18 @@ namespace PersonnelTracking
             detail.PositionID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[7].Value);
             detail.EmployeeID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
             detail.Salary = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[8].Value);
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to delete Employee?", "warning", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                EmployeeBLL.DeleteEmployee(detail.EmployeeID);
+                MessageBox.Show("Employee deleted successfully");
+                FillAllData();
+                CleanFilters();
+            }
         }
     }
 }

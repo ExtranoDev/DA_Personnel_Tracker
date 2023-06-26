@@ -23,6 +23,24 @@ namespace DAL.DAO
 			}
         }
 
+        public static void DeletePosition(int iD)
+        {
+			try
+			{
+				Position position = db.Positions.First(x => x.ID == iD);
+				db.Positions.DeleteOnSubmit(position);
+				db.SubmitChanges();
+
+				// Add C# codes to delete Employee with deleted Position ID
+				// Code has been created with Trigger
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+        }
+
         public static List<PositionDTO> GetPositions()
         {
 			try

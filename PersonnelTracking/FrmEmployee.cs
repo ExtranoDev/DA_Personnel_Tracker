@@ -70,6 +70,15 @@ namespace PersonnelTracking
                 imagePath = Application.StartupPath + "\\images\\" + detail.ImagePath;
                 txtImagePath.Text = imagePath;
                 pictureBox1.ImageLocation = imagePath;
+
+                if (!UserStatic.isAdmin)
+                {
+                    chkAdmin.Enabled = false;
+                    txtUserNo.Enabled = false;
+                    txtSalary.Enabled = false;
+                    cmbDepartment.Enabled = false;
+                    cmbPosition.Enabled = false;
+                }
             }
         }
 

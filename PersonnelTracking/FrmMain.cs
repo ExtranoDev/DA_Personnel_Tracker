@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL.DTO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,10 +25,24 @@ namespace PersonnelTracking
 
         private void btnEmployee_Click(object sender, EventArgs e)
         {
-            FrmEmployeeList frm = new FrmEmployeeList();
-            this.Hide();
-            frm.ShowDialog();
-            this.Visible= true;
+            if((bool)!UserStatic.isAdmin)
+            {
+                EmployeeDTO dto = new EmployeeDTO();
+                EmployeeDetailDTO detail = new EmployeeDetailDTO();
+                FrmEmployee frm = new FrmEmployee();
+
+                frm.detail = detail;
+                frm.isUpdate = true;
+                this.Hide();
+                frm.ShowDialog();
+                this.Visible = true;
+            } else
+            {
+                FrmEmployeeList frm = new FrmEmployeeList();
+                this.Hide();
+                frm.ShowDialog();
+                this.Visible = true;
+            }
         }
 
         private void btnTasks_Click(object sender, EventArgs e)
@@ -81,6 +96,17 @@ namespace PersonnelTracking
         private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+            if(!UserStatic.isAdmin)
+            {
+                btnDepartment.Visible = false;
+                btnPosition.Visible = false;
+                btnLogout.Location = new Point(169, 195);
+                btnExit.Location = new Point(316, 195);
+            }
         }
     }
 }
