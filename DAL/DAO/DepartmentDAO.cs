@@ -20,6 +20,25 @@ namespace DAL.DAO
             }
         }
 
+        public static void DeleteDepartment(int iD)
+        {
+            try
+            {
+                Department dept = db.Departments.First(x => x.ID == iD);
+                db.Departments.DeleteOnSubmit(dept);
+                db.SubmitChanges();
+
+                // Add C# codes to delete Employee & Position with deleted Department
+                // ID
+                // Code has been created with Trigger
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public static List<Department> GetDepartments()
         {
             return db.Departments.ToList();

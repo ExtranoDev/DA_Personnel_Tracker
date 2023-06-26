@@ -81,7 +81,7 @@ namespace PersonnelTracking
             if (result == DialogResult.Yes)
             {
                 PositionBLL.DeletePosition(detail.ID);
-                MessageBox.Show("Salary Deleted Successfully");
+                MessageBox.Show("Position Deleted Successfully");
                 FillGrid();
             }
         }
