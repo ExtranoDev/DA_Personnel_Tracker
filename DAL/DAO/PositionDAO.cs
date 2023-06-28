@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL.DAO
 {
-    public class PositionDAO : EmployeeContext
+    public class PositionDAO : EmployeeContext, IDAO<PositionDTO, Position>
     {
         public static void AddPosition(Position position)
         {
@@ -86,6 +86,26 @@ namespace DAL.DAO
 
 				throw ex;
 			}
+        }
+
+        public bool Delete(int ID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Insert(Position entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<PositionDTO> Select()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Update(Position entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }
